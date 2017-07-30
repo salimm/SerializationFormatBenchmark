@@ -13,13 +13,21 @@ public class ExperimentExecutor {
 
 	public ExperimentExecutor() {
 		setExperiments(new ArrayList<Experiment>());
+		this.serializers = new ArrayList<Serializer>();
 	}
 
-	public ExperimentExecutor(List<Experiment> experimnets) {
-		setExperiments(experimnets);
 
+	public void init(){
+		for (Serializer serializer : getSerializers()) {
+			try {
+				serializer.deserialize(serializer.serialize(new int[]{1,2,3,4,5,6,7,8,9,10}, int[].class), int[].class);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
-
+	
+	
 	public List<ExperimentResult> run() {
 		List<ExperimentResult> results = new ArrayList<ExperimentResult>();
 
