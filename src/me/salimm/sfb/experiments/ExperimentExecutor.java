@@ -11,7 +11,10 @@ public class ExperimentExecutor {
 
 	private List<Serializer> serializers;
 
-	public ExperimentExecutor() {
+	private int attempts;
+
+	public ExperimentExecutor(int attempts) {
+		this.attempts = attempts;
 		setExperiments(new ArrayList<Experiment>());
 		this.serializers = new ArrayList<Serializer>();
 	}
@@ -32,7 +35,7 @@ public class ExperimentExecutor {
 		List<ExperimentResult> results = new ArrayList<ExperimentResult>();
 
 		for (Experiment exp : getExperiments()) {
-			results.addAll(exp.run(serializers));
+			results.addAll(exp.run(serializers,attempts));
 		}
 
 		return results;

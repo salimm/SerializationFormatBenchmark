@@ -1,15 +1,16 @@
 package me.salimm.sfb.experiments;
 
 
+
 import me.salimm.sfb.DataUtils;
 
-public class BigDataDoubleExperiment extends MatrixBasedExperiment<double[][]> {
+public class BigDataNormalizedDoubleRoundedExperiment extends MatrixBasedExperiment<double[][]> {
 
-	public BigDataDoubleExperiment(boolean isTest) {
+	public BigDataNormalizedDoubleRoundedExperiment(boolean isTest) {
 		super(isTest);
 	}
 
-	private static final String NAME = "Big Data Range(-MAX_DOUBLE, MAX_DOUBLE)";
+	private static final String NAME = "Big Data Normalized Rounded (2 decimal) Numeric";
 	private static final String SERIALIZATION_TIME = " Serialization Time";
 	private static final String DESERIALIZATION_TIME = " Deserialization Time";
 	private static final String SERIALIZED_SIZE = " Serialized Size";
@@ -18,7 +19,6 @@ public class BigDataDoubleExperiment extends MatrixBasedExperiment<double[][]> {
 
 	private final int[] lengthsTest = new int[] { 100, 1000, 10000 };
 	private final int[] lengths = new int[] { 10, 100, 1000, 10000, 100000, 1000000, 10000000 };
-
 
 	@Override
 	protected String getSerializeSizeName() {
@@ -42,7 +42,8 @@ public class BigDataDoubleExperiment extends MatrixBasedExperiment<double[][]> {
 
 	@Override
 	protected double[][] getData(int width, int length) {
-		return  DataUtils.generateNumericData(width, length, Double.MIN_VALUE, Double.MAX_VALUE, false);
+		double[][] data = DataUtils.generateNumericData(width, length, 0, 1, false);
+		return data;
 	}
 
 	@Override

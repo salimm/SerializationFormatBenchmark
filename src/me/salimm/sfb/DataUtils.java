@@ -4,12 +4,16 @@ import java.util.Random;
 
 public class DataUtils {
 
-	public static double[][] generateNumericData(int width, int length, double minRange, double maxRange) {
+	public static double[][] generateNumericData(int width, int length, double minRange, double maxRange,
+			boolean round) {
 		double span = maxRange - minRange;
 		double[][] data = new double[width][length];
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < length; j++) {
 				data[i][j] = Math.random() * span + minRange;
+				if (round) {
+					data[i][j] = data[i][j] * 100 / 100;
+				}
 			}
 		}
 		return data;

@@ -1,12 +1,10 @@
 package me.salimm.sfb.experiments;
 
-import java.util.ArrayList;
-import java.util.List;
+
 
 import me.salimm.sfb.DataUtils;
-import me.salimm.sfb.formats.Serializer;
 
-public class BigDataStringExperiment extends Experiment {
+public class BigDataStringExperiment extends MatrixBasedExperiment<String[][]> {
 
 	public BigDataStringExperiment(boolean isTest) {
 		super(isTest);
@@ -22,73 +20,46 @@ public class BigDataStringExperiment extends Experiment {
 	private final int[] lengthsTest = new int[] { 100, 1000 };
 	private final int[] lengths = new int[] { 10, 100, 1000, 10000, 100000 };
 
+	
 	@Override
-	public List<ExperimentResult> run(List<Serializer> serializers) {
-		int[] lengths = this.lengths;
-		if (isTest()) {
-			lengths = lengthsTest;
-		}
+	protected String getSerializeSizeName() {
+		return SERIALIZED_SIZE;
+	}
 
-		List<ExperimentResult> results = new ArrayList<ExperimentResult>();
+	@Override
+	protected String getDeserializationTimeName() {
+		return DESERIALIZATION_TIME;
+	}
 
-		double[][] sTimes = new double[serializers.size()][lengths.length];
-		double[][] dsTimes = new double[serializers.size()][lengths.length];
+	@Override
+	protected String getSerializationTimeName() {
+		return SERIALIZATION_TIME;
+	}
 
-		double[][] sSizes = new double[serializers.size()][lengths.length];
+	@Override
+	protected String getName() {
+		return NAME;
+	}
 
-		for (int valIdx = 0; valIdx < lengths.length; valIdx++) {
-			int length = lengths[valIdx];
+	@Override
+	protected String[][] getData(int width, int length) {
+		String[][] data = DataUtils.generateStringData(width, length, 3, 15);
+		return data;
+	}
 
-			String[][] data = DataUtils.generateStringData(width, length, 3, 15);
+	@Override
+	protected int getWidth() {
+		return width;
+	}
 
-			System.gc();
+	@Override
+	protected int[] getLengthsTest() {
+		return lengthsTest;
+	}
 
-			for (int i = 0; i < serializers.size(); i++) {
-				Serializer serializer = serializers.get(i);
-
-				try {
-					long t1 = System.currentTimeMillis();
-					byte[] deData = serializer.serialize(data, String[][].class);
-					long t2 = System.currentTimeMillis();
-					serializer.deserialize(deData, String[][].class);
-					long t3 = System.currentTimeMillis();
-
-					// running time
-					sTimes[i][valIdx] = t2 - t1;
-					dsTimes[i][valIdx] = t3 - t2;
-					sSizes[i][valIdx] = deData.length;
-
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		}
-
-		for (int i = 0; i < serializers.size(); i++) {
-			Serializer serializer = serializers.get(i);
-			// create serialization experiment result
-			ExperimentResult result = new ExperimentResult(serializer.getFormatType());
-			result.setName(NAME + SERIALIZATION_TIME);
-			result.setRanges(lengths);
-			result.setValues(sTimes[i]);
-			results.add(result);
-
-			// create deserialization experiment result
-			result = new ExperimentResult(serializer.getFormatType());
-			result.setName(NAME + DESERIALIZATION_TIME);
-			result.setRanges(lengths);
-			result.setValues(dsTimes[i]);
-			results.add(result);
-
-			// making Experiment Result for size of serialization
-			result = new ExperimentResult(serializer.getFormatType());
-			result.setName(NAME + SERIALIZED_SIZE);
-			result.setRanges(lengths);
-			result.setValues(sSizes[i]);
-			results.add(result);
-		}
-
-		return results;
+	@Override
+	protected int[] getList() {
+		return lengths;
 	}
 
 }

@@ -12,7 +12,7 @@ public abstract class Experiment {
 		this.setTest(isTest);
 	}
 
-	public abstract List<ExperimentResult> run(List<Serializer> serializers);
+	public abstract List<ExperimentResult> run(List<Serializer> serializers, int attempts);
 
 	public boolean isTest() {
 		return isTest;

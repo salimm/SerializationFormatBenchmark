@@ -16,6 +16,7 @@ import me.salimm.sfb.formats.SmileSerializer;
 import me.salimm.sfb.experiments.BigDataDoubleExperiment;
 import me.salimm.sfb.experiments.BigDataIntegerExperiment;
 import me.salimm.sfb.experiments.BigDataNormalizedDoubleExperiment;
+import me.salimm.sfb.experiments.BigDataNormalizedDoubleRoundedExperiment;
 import me.salimm.sfb.experiments.BigDataSmallIntegerExperiment;
 import me.salimm.sfb.experiments.BigDataStringExperiment;
 
@@ -26,14 +27,16 @@ public class Runner {
 	public static void main(String[] args) {
 
 		boolean testMode = true;
+		int attempts = 5;
 
-		DataUtils.generateNumericData(100, 2000000, 0, 1);
+		DataUtils.generateNumericData(100, 2000000, 0, 1, false);
 		// creating executor
-		ExperimentExecutor exec = new ExperimentExecutor();
+		ExperimentExecutor exec = new ExperimentExecutor(attempts);
 
 		// adding experiments
 		exec.getExperiments().add(new BigDataNormalizedDoubleExperiment(testMode));
 		exec.getExperiments().add(new BigDataDoubleExperiment(testMode));
+		exec.getExperiments().add(new BigDataNormalizedDoubleRoundedExperiment(testMode));
 		exec.getExperiments().add(new BigDataIntegerExperiment(testMode));
 		exec.getExperiments().add(new BigDataSmallIntegerExperiment(testMode));
 		exec.getExperiments().add(new BigDataStringExperiment(testMode));
@@ -69,9 +72,9 @@ public class Runner {
 			public int compare(ExperimentResult o1, ExperimentResult o2) {
 				int val = o1.getName().compareTo(o2.getName());
 				if (val == 0) {
-					return -o1.getFormatType().compareTo(o2.getFormatType());
+					return o1.getFormatType().name().compareTo(o2.getFormatType().name());
 				}
-				return -val;
+				return val;
 			}
 		});
 
