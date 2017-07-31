@@ -52,7 +52,6 @@ public class BigDataDoubleExperiment extends Experiment {
 					serializer.deserialize(deData, double[][].class);
 					long t3 = System.currentTimeMillis();
 
-					System.out.println("i: " + i + " valIdx: " + valIdx + " lenght: " + length);
 					// running time
 					sTimes[i][valIdx] = t2 - t1;
 					dsTimes[i][valIdx] = t3 - t2;

@@ -42,11 +42,6 @@ public class BigDataStringExperiment extends Experiment {
 			String[][] data = DataUtils.generateStringData(width, length, 3, 15);
 
 			System.gc();
-			// try {
-			// Thread.sleep(1000);
-			// } catch (InterruptedException e1) {
-			// e1.printStackTrace();
-			// }
 
 			for (int i = 0; i < serializers.size(); i++) {
 				Serializer serializer = serializers.get(i);
@@ -58,7 +53,6 @@ public class BigDataStringExperiment extends Experiment {
 					serializer.deserialize(deData, String[][].class);
 					long t3 = System.currentTimeMillis();
 
-					System.out.println("i: " + i + " valIdx: " + valIdx + " lenght: " + length);
 					// running time
 					sTimes[i][valIdx] = t2 - t1;
 					dsTimes[i][valIdx] = t3 - t2;
