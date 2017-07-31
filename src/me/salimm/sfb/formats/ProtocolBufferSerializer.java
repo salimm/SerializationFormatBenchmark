@@ -44,7 +44,7 @@ public class ProtocolBufferSerializer implements Serializer {
 
 	@Override
 	public FormatType getFormatType() {
-		return FormatType.AVRO;
+		return FormatType.PROTOCOL_BUFFERS;
 	}
 
 	public ProtobufSchema getSchema(Class<?> cls) {
