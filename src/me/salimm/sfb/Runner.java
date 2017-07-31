@@ -29,7 +29,7 @@ public class Runner {
 
 	public static void main(String[] args) throws IOException {
 
-		boolean testMode = true;
+		boolean testMode = false;
 		int attempts = 5;
 
 		DataUtils.generateNumericData(100, 2000000, 0, 1, false);
@@ -68,7 +68,7 @@ public class Runner {
 		System.out.println("****     Experiment executed...");
 		System.out.println("************************************");
 
-		// pritning results sets
+		// Printing results sets
 		List<List<ExperimentResult>> grouped = groupResults(results);
 		for (List<ExperimentResult> list : grouped) {
 			System.out.println("------------------------------");
@@ -80,7 +80,12 @@ public class Runner {
 		System.out.println("****     saving files...");
 		System.out.println("************************************");
 
-		// generating outputs
+		// checking of output directory exists
+		if (!new File(RESULTS_DIR).exists()) {
+			new File(RESULTS_DIR).mkdirs();
+		}
+
+		// generating result files
 		for (List<ExperimentResult> list : grouped) {
 			double[][] mat = reprotMatrix(list);
 
