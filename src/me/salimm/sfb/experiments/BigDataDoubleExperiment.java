@@ -6,7 +6,11 @@ import java.util.List;
 import me.salimm.sfb.DataUtils;
 import me.salimm.sfb.formats.Serializer;
 
-public class BigDataDoubleExperiment implements Experiment {
+public class BigDataDoubleExperiment extends Experiment {
+
+	public BigDataDoubleExperiment(boolean isTest) {
+		super(isTest);
+	}
 
 	private static final String NAME = "Big Data Range(-MAX_DOUBLE, MAX_DOUBLE)";
 	private static final String SERIALIZATION_TIME = " Serialization Time";
@@ -15,12 +19,15 @@ public class BigDataDoubleExperiment implements Experiment {
 
 	private static final int width = 10;
 
-	private static final int[] lengths = new int[] { 100, 1000, 10000 };
-	// private static final int[] lengths = new int[] { 10,100,1000,
-	// 10000,100000, 1000000,10000000 };
+	private final int[] lengthsTest = new int[] { 100, 1000, 10000 };
+	private final int[] lengths = new int[] { 10, 100, 1000, 10000, 100000, 1000000, 10000000 };
 
 	@Override
 	public List<ExperimentResult> run(List<Serializer> serializers) {
+		int[] lengths = this.lengths;
+		if (isTest()) {
+			lengths = lengthsTest;
+		}
 		List<ExperimentResult> results = new ArrayList<ExperimentResult>();
 
 		double[][] sTimes = new double[serializers.size()][lengths.length];
@@ -34,11 +41,6 @@ public class BigDataDoubleExperiment implements Experiment {
 			double[][] data = DataUtils.generateNumericData(width, length, Double.MIN_VALUE, Double.MAX_VALUE);
 
 			System.gc();
-			// try {
-			// Thread.sleep(1000);
-			// } catch (InterruptedException e1) {
-			// e1.printStackTrace();
-			// }
 
 			for (int i = 0; i < serializers.size(); i++) {
 				Serializer serializer = serializers.get(i);

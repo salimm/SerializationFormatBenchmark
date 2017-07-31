@@ -25,16 +25,18 @@ public class Runner {
 
 	public static void main(String[] args) {
 
+		boolean testMode = true;
+
 		DataUtils.generateNumericData(100, 2000000, 0, 1);
 		// creating executor
 		ExperimentExecutor exec = new ExperimentExecutor();
 
 		// adding experiments
-		exec.getExperiments().add(new BigDataNormalizedDoubleExperiment());
-		exec.getExperiments().add(new BigDataDoubleExperiment());
-		exec.getExperiments().add(new BigDataIntegerExperiment());
-		exec.getExperiments().add(new BigDataSmallIntegerExperiment());
-		exec.getExperiments().add(new BigDataStringExperiment());
+		exec.getExperiments().add(new BigDataNormalizedDoubleExperiment(testMode));
+		exec.getExperiments().add(new BigDataDoubleExperiment(testMode));
+		exec.getExperiments().add(new BigDataIntegerExperiment(testMode));
+		exec.getExperiments().add(new BigDataSmallIntegerExperiment(testMode));
+		exec.getExperiments().add(new BigDataStringExperiment(testMode));
 
 		// adding serializers
 		exec.getSerializers().add(new JSONSerializer());

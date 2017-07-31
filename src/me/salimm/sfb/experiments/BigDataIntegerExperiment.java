@@ -6,7 +6,11 @@ import java.util.List;
 import me.salimm.sfb.DataUtils;
 import me.salimm.sfb.formats.Serializer;
 
-public class BigDataIntegerExperiment implements Experiment {
+public class BigDataIntegerExperiment extends Experiment {
+
+	public BigDataIntegerExperiment(boolean isTest) {
+		super(isTest);
+	}
 
 	private static final String NAME = "Big Data Integer";
 	private static final String SERIALIZATION_TIME = " Serialization Time";
@@ -15,12 +19,16 @@ public class BigDataIntegerExperiment implements Experiment {
 
 	private static final int width = 10;
 
-	private static final int[] lengths = new int[] { 100, 1000, 10000 };
-	// private static final int[] lengths = new int[] { 10,100,1000,
-	// 10000,100000, 1000000,10000000 };
+	private final int[] lengthsTest = new int[] { 100, 1000, 10000 };
+	private final int[] lengths = new int[] { 10, 100, 1000, 10000, 100000, 1000000, 10000000 };
 
 	@Override
 	public List<ExperimentResult> run(List<Serializer> serializers) {
+		int[] lengths = this.lengths;
+		if (isTest()) {
+			lengths = lengthsTest;
+		}
+
 		List<ExperimentResult> results = new ArrayList<ExperimentResult>();
 
 		double[][] sTimes = new double[serializers.size()][lengths.length];
