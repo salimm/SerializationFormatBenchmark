@@ -1,7 +1,5 @@
 package me.salimm.sfb.experiments;
 
-
-
 import me.salimm.sfb.DataUtils;
 
 public class BigDataNormalizedDoubleRoundedExperiment extends MatrixBasedExperiment<double[][]> {
@@ -59,6 +57,11 @@ public class BigDataNormalizedDoubleRoundedExperiment extends MatrixBasedExperim
 	@Override
 	protected int[] getList() {
 		return lengths;
+	}
+
+	@Override
+	protected Class<double[][]> getSerializedClass() {
+		return double[][].class;
 	}
 
 }

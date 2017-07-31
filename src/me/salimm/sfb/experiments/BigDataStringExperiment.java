@@ -62,4 +62,8 @@ public class BigDataStringExperiment extends MatrixBasedExperiment<String[][]> {
 		return lengths;
 	}
 
+	@Override
+	protected Class<String[][]> getSerializedClass() {
+		return String[][].class;
+	}
 }

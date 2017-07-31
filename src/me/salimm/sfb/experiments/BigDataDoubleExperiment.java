@@ -60,4 +60,9 @@ public class BigDataDoubleExperiment extends MatrixBasedExperiment<double[][]> {
 		return lengths;
 	}
 
+	@Override
+	protected Class<double[][]> getSerializedClass() {
+		return double[][].class;
+	}
+
 }

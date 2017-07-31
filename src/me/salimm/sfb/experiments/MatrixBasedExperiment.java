@@ -13,6 +13,7 @@ public abstract class MatrixBasedExperiment<T> extends Experiment {
 
 	@Override
 	public List<ExperimentResult> run(List<Serializer> serializers, int attempts) {
+		System.out.println("running: " + getName());
 		int[] lengths = getList();
 		if (isTest()) {
 			lengths = getLengthsTest();
@@ -37,9 +38,9 @@ public abstract class MatrixBasedExperiment<T> extends Experiment {
 				try {
 					for (int j = 0; j < attempts; j++) {
 						long t1 = System.currentTimeMillis();
-						byte[] deData = serializer.serialize(data, double[][].class);
+						byte[] deData = serializer.serialize(data, getSerializedClass());
 						long t2 = System.currentTimeMillis();
-						serializer.deserialize(deData, double[][].class);
+						serializer.deserialize(deData, getSerializedClass());
 						long t3 = System.currentTimeMillis();
 
 						// running time
@@ -84,6 +85,8 @@ public abstract class MatrixBasedExperiment<T> extends Experiment {
 
 		return results;
 	}
+
+	protected abstract Class<T> getSerializedClass();
 
 	protected abstract String getSerializeSizeName();
 

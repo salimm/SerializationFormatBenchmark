@@ -58,5 +58,8 @@ public class BigDataSmallIntegerExperiment extends MatrixBasedExperiment<int[][]
 	protected int[] getList() {
 		return lengths;
 	}
-
+	@Override
+	protected Class<int[][]> getSerializedClass() {
+		return int[][].class;
+	}
 }
