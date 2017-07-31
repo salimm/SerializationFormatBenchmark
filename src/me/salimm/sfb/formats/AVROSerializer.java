@@ -31,6 +31,10 @@ public class AVROSerializer implements Serializer {
 		String schemaStr = null;
 		if (cls.isAssignableFrom(double[][].class)) {
 			schemaStr = "{\"type\": \"array\", \"items\": {\"type\": \"array\", \"items\": \"double\"}}";
+		} else if (cls.isAssignableFrom(int[][].class)) {
+			schemaStr = "{\"type\": \"array\", \"items\": {\"type\": \"array\", \"items\": \"int\"}}";
+		} else if (cls.isAssignableFrom(String[][].class)) {
+			schemaStr = "{\"type\": \"array\", \"items\": {\"type\": \"array\", \"items\": \"string\"}}";
 		} else if (cls.isAssignableFrom(int[].class)) {
 			schemaStr = "{\"type\": \"array\", \"items\": \"int\"}";
 		} else {
