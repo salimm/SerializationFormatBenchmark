@@ -6,6 +6,7 @@ import me.salimm.sfb.experiments.ExperimentExecutor;
 import me.salimm.sfb.experiments.ExperimentResult;
 import me.salimm.sfb.formats.AVROSerializer;
 import me.salimm.sfb.formats.IonSerializer;
+import me.salimm.sfb.formats.ProtocolBufferSerializer;
 import me.salimm.sfb.experiments.BigDataNormalizedNumbericDataExperiment;
 
 public class Runner {
@@ -26,9 +27,9 @@ public class Runner {
 		// exec.getSerializers().add(new SmileSerializer());
 		// exec.getSerializers().add(new BSONSerializer());
 		// exec.getSerializers().add(new CBORSerializer());
-		// exec.getSerializers().add(new ProtoBufSerializer());
-		exec.getSerializers().add(new AVROSerializer());
-		exec.getSerializers().add(new IonSerializer());
+		exec.getSerializers().add(new ProtocolBufferSerializer());
+		// exec.getSerializers().add(new AVROSerializer());
+		// exec.getSerializers().add(new IonSerializer());
 		// exec.getSerializers().add(new MsgPackSerializer());
 
 		exec.init();
