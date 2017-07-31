@@ -17,7 +17,7 @@ public class AVROSerializer implements Serializer {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends Object> Object deserialize(byte[] data, Class<T> cls) throws Exception {
+	public <T extends Object> T deserialize(byte[] data, Class<T> cls) throws Exception {
 		AvroMapper mapper = new AvroMapper();
 		return (T) mapper.readerFor(cls).with(getSchema(cls)).readValue(data);
 	}

@@ -1,6 +1,5 @@
 package me.salimm.sfb.experiments;
 
-
 import me.salimm.sfb.DataUtils;
 
 public class BigDataDoubleExperiment extends MatrixBasedExperiment<double[][]> {
@@ -18,7 +17,6 @@ public class BigDataDoubleExperiment extends MatrixBasedExperiment<double[][]> {
 
 	private final int[] lengthsTest = new int[] { 100, 1000, 10000 };
 	private final int[] lengths = new int[] { 10, 100, 1000, 10000, 100000, 1000000, 10000000 };
-
 
 	@Override
 	protected String getSerializeSizeName() {
@@ -42,7 +40,7 @@ public class BigDataDoubleExperiment extends MatrixBasedExperiment<double[][]> {
 
 	@Override
 	protected double[][] getData(int width, int length) {
-		return  DataUtils.generateNumericData(width, length, Double.MIN_VALUE, Double.MAX_VALUE, false);
+		return DataUtils.generateNumericData(width, length, Double.MIN_VALUE, Double.MAX_VALUE, false);
 	}
 
 	@Override

@@ -13,7 +13,7 @@ public class MsgPackSerializer implements Serializer {
 	}
 
 	@Override
-	public <T extends Object> Object deserialize(byte[] data, Class<T> cls) throws Exception {
+	public <T extends Object> T deserialize(byte[] data, Class<T> cls) throws Exception {
 		ObjectMapper mapper = new ObjectMapper(new MessagePackFactory());
 		return mapper.readValue(data, cls);
 	}

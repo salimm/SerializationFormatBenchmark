@@ -12,7 +12,7 @@ public class SmileSerializer implements Serializer {
 	}
 
 	@Override
-	public <T extends Object> Object deserialize(byte[] data, Class<T> cls) throws Exception {
+	public <T extends Object> T deserialize(byte[] data, Class<T> cls) throws Exception {
 		ObjectMapper mapper = new ObjectMapper(new SmileFactory());
 		return mapper.readValue(data, cls);
 	}

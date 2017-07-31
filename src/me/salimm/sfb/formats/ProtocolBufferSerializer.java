@@ -25,7 +25,7 @@ public class ProtocolBufferSerializer implements Serializer {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public <T extends Object> Object deserialize(byte[] data, Class<T> cls) throws Exception {
+	public <T extends Object> T deserialize(byte[] data, Class<T> cls) throws Exception {
 		ObjectMapper mapper = new ProtobufMapper();
 		if (cls.isAssignableFrom(double[].class)) {
 			return (T) ((Container1) mapper.readerFor(Container1.class).with(getSchema(cls)).readValue(data)).getData();

@@ -54,7 +54,11 @@ public abstract class MatrixBasedExperiment<T> extends Experiment {
 					sSizes[i][valIdx] /= attempts;
 
 				} catch (Exception e) {
-					e.printStackTrace();
+					sTimes[i][valIdx] = -1;
+					dsTimes[i][valIdx] = -1;
+					sSizes[i][valIdx] = -1;
+					System.err.println("Failed running method:" + serializer.getFormatType() + ", length: " + length
+							+ " in experiment: " + getName());
 				}
 			}
 		}
