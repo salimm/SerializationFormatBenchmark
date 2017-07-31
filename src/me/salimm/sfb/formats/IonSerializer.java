@@ -1,7 +1,6 @@
 package me.salimm.sfb.formats;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.cbor.CBORFactory;
 import com.fasterxml.jackson.dataformat.ion.IonObjectMapper;
 
 public class IonSerializer implements Serializer {

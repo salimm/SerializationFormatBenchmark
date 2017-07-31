@@ -2,12 +2,7 @@ package me.salimm.sfb.formats;
 
 import java.io.IOException;
 
-import org.apache.avro.Schema;
-
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.dataformat.avro.AvroFactory;
-import com.fasterxml.jackson.dataformat.avro.AvroMapper;
-import com.fasterxml.jackson.dataformat.avro.AvroSchema;
 import com.fasterxml.jackson.dataformat.protobuf.ProtobufMapper;
 import com.fasterxml.jackson.dataformat.protobuf.schema.ProtobufSchema;
 import com.fasterxml.jackson.dataformat.protobuf.schema.ProtobufSchemaLoader;
@@ -33,9 +28,9 @@ public class ProtocolBufferSerializer implements Serializer {
 	public <T extends Object> Object deserialize(byte[] data, Class<T> cls) throws Exception {
 		ObjectMapper mapper = new ProtobufMapper();
 		if (cls.isAssignableFrom(double[].class)) {
-			return (T) ((Container1) mapper.reader(Container1.class).with(getSchema(cls)).readValue(data)).getData();
+			return (T) ((Container1) mapper.readerFor(Container1.class).with(getSchema(cls)).readValue(data)).getData();
 		} else if (cls.isAssignableFrom(int[].class)) {
-			return (T) ((Container2) mapper.reader(Container2.class).with(getSchema(cls)).readValue(data)).getData();
+			return (T) ((Container2) mapper.readerFor(Container2.class).with(getSchema(cls)).readValue(data)).getData();
 		} else {
 			return null;
 		}

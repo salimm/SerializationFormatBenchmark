@@ -19,7 +19,7 @@ public class AVROSerializer implements Serializer {
 	@Override
 	public <T extends Object> Object deserialize(byte[] data, Class<T> cls) throws Exception {
 		AvroMapper mapper = new AvroMapper();
-		return (T) mapper.reader(cls).with(getSchema(cls)).readValue(data);
+		return (T) mapper.readerFor(cls).with(getSchema(cls)).readValue(data);
 	}
 
 	@Override
